@@ -1,5 +1,7 @@
 import random
 
+
+#random wether for the race 
 def get_weather():
   weather_conditions = ["Rain", "Sunny", "Snowy", "Thunder"]
   return random.choice(weather_conditions)
@@ -42,6 +44,7 @@ def main():
               "thunder": random.randint(1,10)},
     }
 
+  
   current_weather = get_weather()
   print(f"The weather today is: {current_weather}")
   horse_names = list(horses.keys())
@@ -70,7 +73,7 @@ def main():
               print("Please select a valid horse from the list")
 
 
-    # Ask for a bet amount between $5 and $100
+    # Ask for a bet amount between $5 and $100 for each player 
   bet_amounts = []
   for i in range(num_players):
       bet_amount = 0
@@ -90,6 +93,7 @@ def main():
       else:
           print(f"Sorry Player {player + 1}, better luck next time.")
 
+# fucntion that creates a weight for the horses increasing likey hood of horses to win depedning on thier atributes 
 def calculate_chances(horses, current_weather, horse_name):
     base_weight = 1.0
     wether_weight = horses[horse_name].get("Weather", {}).get(current_weather, 0)
@@ -99,6 +103,8 @@ def calculate_chances(horses, current_weather, horse_name):
     total_weight = base_weight + wether_weight + speed_weight + age_weight
     return total_weight
 
+# fucntion that randomly selects a winner from the horeses 
+# It takes in the weight of the horses giving some higher chances to win
 def select_random_winner(horses, current_weather):
     chances = {horse: calculate_chances(horses, current_weather, horse)
                for horse in horses
@@ -109,3 +115,4 @@ def select_random_winner(horses, current_weather):
 
 
 main()
+
